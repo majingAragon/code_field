@@ -88,6 +88,8 @@ class CodeField extends StatefulWidget {
   final Decoration? decoration;
   final TextSelectionThemeData? textSelectionTheme;
   final FocusNode? focusNode;
+  final String? hintText;
+  final TextStyle? hintTextStyle;
 
   const CodeField({
     Key? key,
@@ -105,6 +107,8 @@ class CodeField extends StatefulWidget {
     this.textSelectionTheme,
     this.lineNumberBuilder,
     this.focusNode,
+    this.hintText,
+    this.hintTextStyle,
   }) : super(key: key);
 
   @override
@@ -132,7 +136,7 @@ class CodeFieldState extends State<CodeField> {
     _numberController = LineNumberController(widget.lineNumberBuilder);
     widget.controller.addListener(_onTextChanged);
     _focusNode = widget.focusNode ?? FocusNode();
-    _focusNode!.attach(context,onKey: _onKey);
+    _focusNode!.attach(context, onKey: _onKey);
 
     _onTextChanged();
   }
@@ -270,10 +274,11 @@ class CodeFieldState extends State<CodeField> {
       expands: widget.expands,
       scrollController: _codeScroll,
       decoration: InputDecoration(
-        disabledBorder: InputBorder.none,
-        border: InputBorder.none,
-        focusedBorder: InputBorder.none,
-      ),
+          disabledBorder: InputBorder.none,
+          border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          hintText: widget.hintText,
+          hintStyle: widget.hintTextStyle),
       cursorColor: cursorColor,
       autocorrect: false,
       enableSuggestions: false,
