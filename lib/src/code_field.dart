@@ -90,6 +90,7 @@ class CodeField extends StatefulWidget {
   final FocusNode? focusNode;
   final String? hintText;
   final TextStyle? hintTextStyle;
+  final Function(String text)? onChanged;
 
   const CodeField({
     Key? key,
@@ -109,6 +110,7 @@ class CodeField extends StatefulWidget {
     this.focusNode,
     this.hintText,
     this.hintTextStyle,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -282,6 +284,11 @@ class CodeFieldState extends State<CodeField> {
       cursorColor: cursorColor,
       autocorrect: false,
       enableSuggestions: false,
+      onChanged: (text) {
+        if (widget.onChanged != null) {
+          widget.onChanged!(text);
+        }
+      },
     );
 
     final codeCol = Theme(
