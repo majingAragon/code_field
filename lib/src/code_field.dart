@@ -91,6 +91,7 @@ class CodeField extends StatefulWidget {
   final String? hintText;
   final TextStyle? hintTextStyle;
   final Function(String text)? onChanged;
+  final InputDecoration? inputDecoration;
 
   const CodeField({
     Key? key,
@@ -111,6 +112,7 @@ class CodeField extends StatefulWidget {
     this.hintText,
     this.hintTextStyle,
     this.onChanged,
+    this.inputDecoration,
   }) : super(key: key);
 
   @override
@@ -275,12 +277,13 @@ class CodeFieldState extends State<CodeField> {
       maxLines: widget.maxLines,
       expands: widget.expands,
       scrollController: _codeScroll,
-      decoration: InputDecoration(
-          disabledBorder: InputBorder.none,
-          border: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          hintText: widget.hintText,
-          hintStyle: widget.hintTextStyle),
+      decoration: widget.inputDecoration ??
+          InputDecoration(
+              disabledBorder: InputBorder.none,
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              hintText: widget.hintText,
+              hintStyle: widget.hintTextStyle),
       cursorColor: cursorColor,
       autocorrect: false,
       enableSuggestions: false,
